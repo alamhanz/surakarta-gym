@@ -21,26 +21,32 @@ class SurakartaUI:
     def render(self):
         """Renders the board using Pygame with a centered grid where pieces are placed at intersections."""
         self.init_ui()
-        self.screen.fill((255, 255, 255))
+        self.screen.fill((222, 184, 135))
 
-        # Draw grid with thicker lines
+        # Draw grid with thicker lines, highlight first and last row/column
         for i in range(7):
+            color = (0, 0, 0)
+            if i == 0 or i == 5:
+                color = (205, 127, 50)
+            if i == 1 or i == 4:
+                color = (101, 67, 33)
+            if i == 2 or i == 3:
+                color = (220, 204, 0)
+
             pygame.draw.line(
                 self.screen,
-                (0, 0, 0),
+                color,
                 (i * self.grid_size + self.offset, self.offset),
                 (i * self.grid_size + self.offset, self.window_size - self.offset),
                 3,
             )
             pygame.draw.line(
                 self.screen,
-                (0, 0, 0),
+                color,
                 (self.offset, i * self.grid_size + self.offset),
                 (self.window_size - self.offset, i * self.grid_size + self.offset),
                 3,
             )
-
-        # pygame.draw.arc(self.screen, (0, 0, 0), (0, 0, 150, 150), 0.3, 1, 3)
 
         # Draw pieces at intersections, centered properly
         for y in range(6):
