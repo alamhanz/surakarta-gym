@@ -4,7 +4,7 @@ from status import Chess
 
 
 class SurakartaUI:
-    def __init__(self, board, grid_size=50, window_size=300):
+    def __init__(self, board, grid_size=80, window_size=480):  # Increased size
         self.board = board
         self.grid_size = grid_size
         self.window_size = window_size
@@ -38,14 +38,36 @@ class SurakartaUI:
                 color,
                 (i * self.grid_size + self.offset, self.offset),
                 (i * self.grid_size + self.offset, self.window_size - self.offset),
-                3,
+                5,
             )
             pygame.draw.line(
                 self.screen,
                 color,
                 (self.offset, i * self.grid_size + self.offset),
                 (self.window_size - self.offset, i * self.grid_size + self.offset),
-                3,
+                5,
+            )
+
+        # Draw 3/4 circles in corners to connect lines
+        corner_positions = [
+            (self.offset, self.offset),
+            (self.window_size - self.offset, self.offset),
+            (self.offset, self.window_size - self.offset),
+            (self.window_size - self.offset, self.window_size - self.offset),
+        ]
+        for pos in corner_positions:
+            pygame.draw.arc(
+                self.screen,
+                (101, 67, 33),
+                (
+                    pos[0] - self.grid_size,
+                    pos[1] - self.grid_size,
+                    self.grid_size * 2,
+                    self.grid_size * 2,
+                ),
+                0 * 3.14,
+                1.5 * 3.14,
+                5,
             )
 
         # Draw pieces at intersections, centered properly
