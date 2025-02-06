@@ -40,23 +40,32 @@ class SurakartaUI:
                 3,
             )
 
+        # pygame.draw.arc(self.screen, (0, 0, 0), (0, 0, 150, 150), 0.3, 1, 3)
+
         # Draw pieces at intersections, centered properly
         for y in range(6):
             for x in range(6):
-                color = (200, 200, 200)
-                if self.board.get_chess(x, y) == Chess.Red:
-                    color = (255, 0, 0)
-                elif self.board.get_chess(x, y) == Chess.Black:
-                    color = (0, 0, 0)
-                pygame.draw.circle(
-                    self.screen,
-                    color,
-                    (
-                        x * self.grid_size + self.offset,
-                        y * self.grid_size + self.offset,
-                    ),
-                    10,
-                )
+                piece = self.board.get_chess(x, y)
+                if piece == Chess.Red:
+                    pygame.draw.circle(
+                        self.screen,
+                        (255, 0, 0),
+                        (
+                            x * self.grid_size + self.offset,
+                            y * self.grid_size + self.offset,
+                        ),
+                        15,
+                    )
+                elif piece == Chess.Black:
+                    pygame.draw.circle(
+                        self.screen,
+                        (0, 0, 0),
+                        (
+                            x * self.grid_size + self.offset,
+                            y * self.grid_size + self.offset,
+                        ),
+                        15,
+                    )
         pygame.display.flip()
 
     def close(self):
