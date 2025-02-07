@@ -45,6 +45,7 @@ class SurakartaEnv(gym.Env):
         if piece == Chess.Null:
             reward = -5  # Penalize selecting an empty space
         elif self.board.can_move(x, y, direction):
+            # TODO: must add player eat as well if possible
             self.board.player_move(x, y, direction)
             reward = 1  # Reward for a successful move
         else:
@@ -56,6 +57,8 @@ class SurakartaEnv(gym.Env):
         elif self.board.status == GameStatus.BlackWon:
             reward = -10
             done = True
+
+        print(self.board.get_can_eat(x, y))
 
         return self._get_observation(), reward, done, False, {}
 
