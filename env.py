@@ -23,7 +23,7 @@ class SurakartaEnv(gym.Env):
 
         # Action space: (piece_x, piece_y, move_direction)
         self.action_space = spaces.MultiDiscrete(
-            [6, 6, 8]
+            [6, 6, 8, 2]
         )  # 6x6 board, 8 possible directions
 
         # Observation space represents the board state
@@ -37,7 +37,7 @@ class SurakartaEnv(gym.Env):
 
     def step(self, action):
         """Executes the given action and returns the next state, reward, done, and info."""
-        x, y, direction = action  # Extract piece location and move direction
+        x, y, direction, eat = action  # Extract piece location and move direction
         reward, done = 0, False
 
         # Check if there is a piece at the selected coordinates
